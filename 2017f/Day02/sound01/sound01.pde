@@ -4,41 +4,41 @@ Minim minim;
 AudioPlayer player;
 
 void setup() {
-  size(512, 200, P3D);
+  size(960, 540, FX2D);
   
   minim = new Minim(this);
   player = minim.loadFile("molasses.mp3");
+  player.play();
+  player.loop();
+
+  blendMode(ADD);
 }
 
 void draw() {
   background(0);
-  stroke(255);
+
+  float xPos = map(player.position(), 0, player.length(), 0, width);
+  noStroke();
+  fill(0, 40, 80);
+  rect(0, 0, xPos, height);
   
   for (int i = 0; i < player.bufferSize() - 1; i++) {
     float x1 = map(i, 0, player.bufferSize(), 0, width);
     float x2 = map(i+1, 0, player.bufferSize(), 0, width);
-    line(x1, 50 + player.left.get(i)*50, x2, 50 + player.left.get(i+1)*50);
-    line(x1, 150 + player.right.get(i)*50, x2, 150 + player.right.get(i+1)*50);
-  }
+    float y1 = avgSample(i);
+    float y2 = avgSample(i+1);
+
+    stroke(0, 40, 127);
+    strokeWeight(8);
+    line(x1, y1, x2, y2);
   
-  float posx = map(player.position(), 0, player.length(), 0, width);
-  stroke(0,200,0);
-  line(posx, 0, posx, height);
-  
-  if (player.isPlaying()){
-    text("Press any key to pause playback.", 10, 20 );
-  } else {
-    text("Press any key to start playback.", 10, 20 );
+    stroke(0, 0, 255);
+    strokeWeight(4);
+    line(x1, y1, x2, y2);
   }
 }
 
-void keyPressed() {
-  if (player.isPlaying()) {
-    player.pause();
-  } else if (player.position() == player.length()) {
-    player.rewind();
-    player.play();
-  } else {
-    player.play();
-  }
+float avgSample(int index) {
+  float val = (player.left.get(index) + player.right.get(index)) / 2;
+  return (val * height) + (height/2);
 }
