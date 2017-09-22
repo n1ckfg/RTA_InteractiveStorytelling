@@ -23,11 +23,11 @@ void setup() {
 }
 
 void draw() {
-  if (result.toLowerCase().equals("castle")) {
+  if (result.toLowerCase().contains("castle")) {
     currentImg = castleImg;
-  } else if (result.toLowerCase().equals("forest")) {
+  } else if (result.toLowerCase().contains("forest")) {
     currentImg = forestImg;
-  } else if (result.toLowerCase().equals("village")) {
+  } else if (result.toLowerCase().contains("village")) {
     currentImg = villageImg;
   }
   
