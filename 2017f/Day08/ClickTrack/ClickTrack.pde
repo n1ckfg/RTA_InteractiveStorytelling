@@ -13,12 +13,9 @@ void setup() {
   player.play();
 
   output = new Data();
-  output.beginSave();
-
   try {
     output.load("output.txt");
     for (int i=0; i<output.data.length; i++) {
-      output.add(output.data[i]);
       String[] s = output.data[i].split(",");
       int index = int(s[0]);
       float time = float(s[1]);
@@ -39,13 +36,16 @@ void draw() {
 
 void keyPressed() {
   if (key=='0' || key=='1' || key=='2' || key=='3' || key=='4' || key=='5' || key=='6' || key=='7' || key=='8' || key=='9') {
-    String val = key + ", " + currentTime;
-    println(val);
-    output.add(val);
-    
+    notes.add(new Note(int(""+key), currentTime));
   }
   
   if (key=='s' || key=='S') {
+    output.beginSave();
+    for (int i=0; i<notes.size(); i++) {
+      Note n = notes.get(i);
+      String s = n.index + ", " + n.startTime;
+      output.add(s);
+    }
     output.endSave("output.txt");
   }
 }

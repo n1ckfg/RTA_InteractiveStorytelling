@@ -8,6 +8,7 @@ class Note {
   Note(int _index, float _startTime) {
     index = _index;
     startTime = _startTime;
+    println("Note: " + index + ", " + startTime);
   }
   
   void run() {
@@ -27,7 +28,9 @@ class Note {
       } else  if (index == 3) {
         fill(0, 127, 255);
         noStroke();
-        ellipse(random(width), random(height), 20, 20);
+        for (int i=0; i<15; i++) {
+          ellipse(random(100, width-100), random(height), 10, 15);
+        }
       }
     }
   }
