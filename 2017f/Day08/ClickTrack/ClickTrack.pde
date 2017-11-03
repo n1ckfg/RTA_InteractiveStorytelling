@@ -1,10 +1,12 @@
 import ddf.minim.*;
+import java.util.Collections;
 
 Minim minim;
 AudioPlayer player;
 Data output;
 float currentTime = 0;
 ArrayList<Note> notes = new ArrayList<Note>();
+float timeOffset = 0;
 
 void setup() {
   size(512, 512, P2D);
@@ -25,7 +27,7 @@ void setup() {
 }
 
 void draw() {
-  currentTime = player.position() / 1000.0;
+  currentTime = (player.position() / 1000.0) + timeOffset;
   
   background(0);
   
@@ -41,11 +43,15 @@ void keyPressed() {
   
   if (key=='s' || key=='S') {
     output.beginSave();
+    
+    Collections.sort(notes);
+    
     for (int i=0; i<notes.size(); i++) {
       Note n = notes.get(i);
       String s = n.index + ", " + n.startTime;
       output.add(s);
     }
+    
     output.endSave("output.txt");
   }
 }

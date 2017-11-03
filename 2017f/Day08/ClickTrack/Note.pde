@@ -1,4 +1,8 @@
-class Note {
+// This keeps the notes sorted by time
+// https://stackoverflow.com/questions/1814095/sorting-an-arraylist-of-objects-using-a-custom-sorting-order
+// https://stackoverflow.com/questions/3705275/help-comparing-float-member-variables-using-comparators
+
+class Note implements Comparable<Note> {
   
   PVector pos = new PVector(width/2, height/2);
   float startTime = 0;
@@ -35,4 +39,8 @@ class Note {
     }
   }
   
+  int compareTo(Note other) {
+    return Float.compare(startTime, other.startTime);
+  }
+
 }
