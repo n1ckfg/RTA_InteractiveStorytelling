@@ -3,6 +3,7 @@ class MovieClip {
   Movie movie;
   PVector p;
   boolean alive = true;
+  int alpha = 255;
   
   MovieClip(PApplet sketch, String fileName) {
     movie = new Movie(sketch, fileName);
@@ -17,7 +18,9 @@ class MovieClip {
         movie.play();
       }
       imageMode(CENTER);
+      tint(255, alpha);
       image(movie, p.x, p.y);
+      noTint();
     }
   }
 

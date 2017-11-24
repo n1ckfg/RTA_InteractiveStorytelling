@@ -16,5 +16,8 @@ void draw() {
   clip1.draw();
   clip2.draw();
   
-  if (millis() > 6000) clip2.alive = false;
+  if (millis() > 6000) {
+    clip1.alpha = 127;
+    clip2.alive = false;
+  }
 }
