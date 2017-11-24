@@ -1,5 +1,3 @@
-import processing.video.*;
-
 MovieClip clip1, clip2;
 
 void setup() {
@@ -13,6 +11,6 @@ void setup() {
 
 void draw() {
   background(0);
-  clip1.draw();
-  clip2.draw();
+  clip1.run();
+  clip2.run();
 }

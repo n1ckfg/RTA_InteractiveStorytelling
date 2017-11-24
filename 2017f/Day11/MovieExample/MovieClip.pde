@@ -1,9 +1,11 @@
+import processing.video.*;
+
 class MovieClip {
   
   Movie movie;
   PVector p;
   boolean alive = true;
-  int alpha = 255;
+  int alpha = 0;
   int fadeDelta = 5;
   
   MovieClip(PApplet sketch, String fileName) {
@@ -13,7 +15,7 @@ class MovieClip {
   }
 
   void update() {
-    //fader();
+    fader();
   }
   
   void draw() {
@@ -26,7 +28,7 @@ class MovieClip {
     noTint();
   }
   
-  void run() {
+  void run() { 
     update();
     draw();
   }
